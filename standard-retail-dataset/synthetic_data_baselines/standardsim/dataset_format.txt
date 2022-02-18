@@ -1,0 +1,51 @@
+{
+	"info": {
+		"description": "Synthetic dataset created in Blender for change detection, instance segmentation, and depth estimation.",
+		"url": "https://github.com/Standard-Cognition/blender-synth",
+		"version": 1,
+		"year": 2021,
+		"contributor": "Cristina Mata, Nick Locascio, Mohammed Sheikh, Kenneth Kihara",
+		"date_created": "July 1, 2021"
+	}
+	"licenses": [
+		{
+			"url": "url_to_our_license",
+			"id": 1,
+			"name": "Attribution License"
+		}
+	]
+	"images": [
+		{
+			"id": 1,
+			"license": 1,
+			"scene": "scene_id_cam-i",
+			"width": image_width (int),
+			"height": image_height (int),
+			"randommat1": "name of 'before' randommats image",
+			"randommat2": "name of 'after' randommats image",
+			"depth1": "name of 'before' depth image",
+			"depth2"" "name of 'after' depth image",
+			"image1": "name of 'before' image",
+			"image2": "name of 'after' image"
+		}
+	]
+	"annotations": [
+		{
+			"id": integer index in all annotations,
+			"sku_id": index in all SKUs,
+			"action": "action",
+			"iscrowd": 0,
+			"segmentation": [[list of points to create mask polygon]]
+			"image_id": integer index in "images" list,
+			"area": int,
+			"scene": "scene_id_cam-i",
+			"bbox": [dist_from_left, dist_from_top, box_width, box_height]
+		}
+	]
+	"categories": [
+		{
+			"id": index in all SKUs,
+			"name": "SKU name"
+		}
+	]
+}

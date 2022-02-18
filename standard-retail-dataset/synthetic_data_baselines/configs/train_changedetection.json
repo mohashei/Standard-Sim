@@ -1,0 +1,78 @@
+{
+    "train_dataset_params": {
+        "dataset_name": "simplesyntheticpairs",
+        "root": "/app/renders_multicam_diff_1",
+        "loader_params": {
+            "batch_size": 16,
+            "drop_last": false,
+            "pin_memory": true,
+            "num_workers": 8
+        },
+        "mode": "train",
+        "crop": true,
+        "resize": true,
+        "spatial_resolution": [512, 360],
+        "overfit": false,
+        "normalize": true,
+        "augment": true,
+        "shuffle": true
+    },
+    "val_dataset_params": {
+        "dataset_name": "simplesyntheticpairs",
+        "root": "/app/renders_multicam_diff_1",
+        "loader_params": {
+            "batch_size": 1
+        },
+        "mode": "val",
+        "crop": false,
+        "resize": true,
+        "spatial_resolution": [512, 360],
+        "overfit": false,
+        "normalize": true,
+        "augment": false,
+        "shuffle": false
+    },
+    "test_dataset_params": {
+        "dataset_name": "simplesyntheticpairs",
+        "root": "/app/renders_multicam_diff_1",
+        "loader_params": {
+            "batch_size": 1
+        },
+        "mode": "test",
+        "crop": false,
+        "resize": true,
+        "spatial_resolution": [512, 360],
+        "overfit": false,
+        "normalize": true,
+        "augment": false,
+        "shuffle": false
+    },
+    "model_params": {
+        "model_name": "changedetection",
+        "num_classes": 4,
+        "dataset_name": "simplesyntheticpairs",
+        "rgb": true,
+        "depth": false,
+        "spatial_resolution": [512, 360],
+        "mode": "test",
+        "max_epochs": 4000,
+        "lr": 0.0004,
+        "save_path": "/app/saved_models/changedetection_benchmark/",
+        "weights_path": "/app/saved_models/changedetection_benchmark/",
+        "load_weights": -1,
+        "val_epochs": [1950],
+        "val_rate": 50,
+        "save_rate": 50,
+        "lr_policy": "cosine",
+        "lr_decay_iters": 10,
+        "batch_size": 16,
+        "loss_weights": true
+    },
+    "visualization_params": {
+        "use_wandb": false,
+        "save_images": true,
+        "save_path": "/app/synthetic_data_baselines/changedetection_test_predictions"
+    },
+    "printout_freq": 1,
+    "model_update_freq": 1
+}

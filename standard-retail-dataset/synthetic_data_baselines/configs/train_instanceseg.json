@@ -1,0 +1,79 @@
+{
+    "train_dataset_params": {
+        "dataset_name": "simpleinstanceseg",
+        "image_root": "/app/renders_multicam_diff_1",
+        "json_root": "/app/synthetic_data_baselines/utils/instance_anno",
+        "loader_params": {
+            "batch_size": 8,
+            "drop_last": true,
+            "pin_memory": true,
+            "num_workers": 8
+        },
+        "mode": "train",
+        "crop": false,
+        "resize": true,
+        "spatial_resolution": [512, 360],
+        "overfit": false,
+        "normalize": true,
+        "augment": false,
+        "shuffle": true
+    },
+    "val_dataset_params": {
+        "dataset_name": "simpleinstanceseg",
+        "image_root": "/app/renders_multicam_diff_1",
+        "json_root": "/app/synthetic_data_baselines/utils/instance_anno",
+        "loader_params": {
+            "batch_size": 1
+        },
+        "mode": "val",
+        "crop": false,
+        "resize": true,
+        "spatial_resolution": [512, 360],
+        "overfit": false,
+        "normalize": true,
+        "augment": false,
+        "shuffle": false
+    },
+    "test_dataset_params": {
+        "dataset_name": "simpleinstanceseg",
+        "image_root": "/app/renders_multicam_diff_1",
+        "json_root": "/app/synthetic_data_baselines/utils/instance_anno",
+        "loader_params": {
+            "batch_size": 1
+        },
+        "mode": "test",
+        "crop": false,
+        "resize": true,
+        "spatial_resolution": [512, 360],
+        "overfit": false,
+        "normalize": true,
+        "augment": false,
+        "shuffle": false
+    },
+    "model_params": {
+        "model_name": "maskrcnn",
+        "num_classes": 1000,
+        "dataset_name": "simpleinstanceseg",
+        "spatial_resolution": [512, 360],
+        "mode": "train",
+        "max_epochs": 4000,
+        "lr": 0.0004,
+        "save_path": "/app/saved_models/instanceseg_benchmark/",
+        "weights_path": "/app/saved_models/instanceseg_benchmark/",
+        "load_weights": -1,
+        "val_epochs": [0],
+        "val_rate": 50,
+        "save_rate": 50,
+        "lr_policy": "cosine",
+        "lr_decay_iters": 10,
+        "batch_size": 8,
+        "loss_weights": -1
+    },
+    "visualization_params": {
+        "use_wandb": false,
+        "save_images": true,
+        "save_path": "/app/synthetic_data_baselines/instanceseg_predictions"
+    },
+    "printout_freq": 1,
+    "model_update_freq": 1
+}

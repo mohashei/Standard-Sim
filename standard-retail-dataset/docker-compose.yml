@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.ipython:/root/.ipython
+      - ~/.cache:/root/.cache
+      - ~/.config/gcloud:/root/.config/gcloud
+      - ~/.bash_history:/root/.bash_history

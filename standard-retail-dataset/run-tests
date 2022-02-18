@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import tempfile
+from pathlib import Path
+
+COOKIECUTTERS = [
+    "base-python",
+    "djangorestframework",
+    # "flask",
+]
+
+base_dir = Path(__file__).resolve().parent
+
+
+def test_cookiecutter(name):
+    with tempfile.TemporaryDirectory() as tempdir:
+        os.chdir(tempdir)
+        srcdir = Path(base_dir)
+        project_folder = Path(tempdir, "testproject")
+        project_folder.mkdir()
+
+        subprocess.check_call(
+            [
+                srcdir.joinpath("start-project.py"),
+                srcdir.joinpath("cookiecutters", name),
+                "--no-input",
+                "--overwrite-if-exists",
+            ]
+        )
+
+        project_folder = Path(tempdir, "testproject")
+        os.chdir(project_folder)
+
+        subprocess.check_call(["docker-compose", "build"])
+        # mirror some env vars
+        test_env_vars = ["RUNTIME_ENVIRONMENT", "BUILD_TYPE", "GOOGLE_APPLICATION_CREDENTIALS"]
+        cmd = ["docker-compose", "run"]
+        for env_var in test_env_vars:
+            if os.environ.get(env_var):
+                cmd.extend(["-e", f"{env_var}={os.environ[env_var]}"])
+        cmd.extend(["app", "./run-tests"])
+        subprocess.check_call(cmd)
+
+
+def main():
+    for name in COOKIECUTTERS:
+        print(f"Testing cookiecutter: {name}")
+        test_cookiecutter(name)
+
+
+if __name__ == "__main__":
+    main()
